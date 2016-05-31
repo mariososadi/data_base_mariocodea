@@ -1,0 +1,90 @@
+CodeaCamp13s-Mac-mini:desktop codea_mac_13$ sqlite3 ejemplo.db
+-- Loading resources from /Users/codea_mac_13/.sqliterc
+
+SQLite version 3.8.10.2 2015-05-20 18:17:19
+Enter ".help" for usage hints.
+sqlite> CREATE TABLE usuarios (
+   ...>   id INTEGER PRIMARY KEY AUTOINCREMENT,
+   ...>   nombre VARCHAR(64) NOT NULL,
+   ...>   apellido  VARCHAR(64) NOT NULL,
+   ...>   email VARCHAR(128) UNIQUE NOT NULL,
+   ...>   fecha_nacimiento DATETIME NOT NULL,
+   ...>   genero VARCHAR(10) NOT NULL
+   ...> );
+sqlite> 
+sqlite> INSERT INTO usuarios
+   ...>  (nombre, apellido, email, fecha_nacimiento, genero)
+   ...>  VALUES
+   ...>  ('Carlos', 'Ribero', 'carlos@yahoo.com', '1970-11-03', 'masculino');
+sqlite> INSERT INTO usuarios
+   ...>  (nombre, apellido, email, fecha_nacimiento, genero)
+   ...>  VALUES
+   ...> ('Mario', 'Sosa', 'mariososa@gmail.com', '1990-14-08', 'masculino');
+sqlite> SELECT * FROM usuarios;
+id          nombre      apellido    email             fecha_nacimiento  genero    
+----------  ----------  ----------  ----------------  ----------------  ----------
+1           Carlos      Ribero      carlos@yahoo.com  1970-11-03        masculino 
+2           Mario       Sosa        mariososa@gmail.  1990-14-08        masculino 
+sqlite> ALTER TABLE usuarios
+   ...> ADD apodo VARCHAR(64) NOT NULL
+   ...> ;
+Error: Cannot add a NOT NULL column with default value NULL
+sqlite> ADD (apodo VARCHAR(64) NOT NULL);
+Error: near "ADD": syntax error
+sqlite> ADD 'apodo' VARCHAR(64) NOT NULL;
+Error: near "ADD": syntax error
+sqlite> ADD apodo VARCHAR(64) NOT NULL;
+Error: near "ADD": syntax error
+sqlite> SELECT* FROM usuarios;
+id          nombre      apellido    email             fecha_nacimiento  genero    
+----------  ----------  ----------  ----------------  ----------------  ----------
+1           Carlos      Ribero      carlos@yahoo.com  1970-11-03        masculino 
+2           Mario       Sosa        mariososa@gmail.  1990-14-08        masculino 
+sqlite> ALTER TABLE usuarios
+   ...> ADD 'apodo' VARCHAR(64) NOT NULL;
+Error: Cannot add a NOT NULL column with default value NULL
+sqlite> ALTER TABLE usuarios
+   ...> ADD 'apodo' VARCHAR(64) NULL;
+sqlite> SELECT * FROM usuarios;
+id          nombre      apellido    email             fecha_nacimiento  genero      apodo     
+----------  ----------  ----------  ----------------  ----------------  ----------  ----------
+1           Carlos      Ribero      carlos@yahoo.com  1970-11-03        masculino             
+2           Mario       Sosa        mariososa@gmail.  1990-14-08        masculino             
+sqlite> usuarios.schema;
+Error: near "usuarios": syntax error
+sqlite> .schema;
+Error: unknown command or invalid arguments:  "schema;". Enter ".help" for help
+sqlite> .shchema
+Error: unknown command or invalid arguments:  "shchema". Enter ".help" for help
+sqlite> .schema
+CREATE TABLE usuarios (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  nombre VARCHAR(64) NOT NULL,
+  apellido  VARCHAR(64) NOT NULL,
+  email VARCHAR(128) UNIQUE NOT NULL,
+  fecha_nacimiento DATETIME NOT NULL,
+  genero VARCHAR(10) NOT NULL
+, 'apodo' VARCHAR(64) NULL);
+sqlite> UPDATE usuarios;
+Error: near ";": syntax error
+sqlite> UPDATE usuarios
+   ...> SET apodo='Charly'
+   ...> WHERE id == 1;
+sqlite> SELECT* FROM usuarios;
+id          nombre      apellido    email             fecha_nacimiento  genero      apodo     
+----------  ----------  ----------  ----------------  ----------------  ----------  ----------
+1           Carlos      Ribero      carlos@yahoo.com  1970-11-03        masculino   Charly    
+2           Mario       Sosa        mariososa@gmail.  1990-14-08        masculino             
+sqlite> UPDATE usuarios
+   ...> SET apellido = 'Rivero', fecha_nacimiento = '1980-11-03'
+   ...> WHERE id == 1;
+sqlite> SELECT*FROMusuarios
+   ...> ;
+Error: near "FROMusuarios": syntax error
+sqlite> SELECT * FROM usuarios
+   ...> ;
+id          nombre      apellido    email             fecha_nacimiento  genero      apodo     
+----------  ----------  ----------  ----------------  ----------------  ----------  ----------
+1           Carlos      Rivero      carlos@yahoo.com  1980-11-03        masculino   Charly    
+2           Mario       Sosa        mariososa@gmail.  1990-14-08        masculino             
+sqlite> 
