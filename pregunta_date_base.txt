@@ -1,0 +1,158 @@
+# 1
+sqlite> SELECT COUNT(OrderID) FROM Orders
+   ...> WHERE CustomerID == 3;
+COUNT(OrderID)
+--------------
+6     
+
+# 2
+sqlite> SELECT COUNT(OrderID) FROM Orders
+   ...> INNER JOIN Customers
+   ...> ON Orders.CustomerID = Customers.CustomerID
+   ...> WHERE ContactName = 'Jim Wood';
+COUNT(OrderID)
+--------------
+6          
+
+# 3
+sqlite> SELECT COUNT(OrderID) FROM Orders
+   ...> INNER JOIN Customers
+   ...> ON Orders.CustomerID = Customers.CustomerID
+   ...> WHERE CompanyName = 'Slots Carpet';
+COUNT(OrderID)
+--------------
+2             
+
+# 4
+sqlite> SELECT CompanyName, COUNT(OrderID) AS TotalOrders FROM Orders
+   ...> INNER JOIN Customers
+   ...> ON Orders.CustomerID = Customers.CustomerID
+   ...> GROUP BY CompanyName
+   ...> ORDER BY TotalOrders DESC;
+CompanyName  TotalOrders
+-----------  -----------
+Floor Co.    6          
+Sagebrush C  5          
+Main Tile a  4          
+Deerfield T  3          
+Slots Carpe  2    
+
+# 5
+sqlite> SELECT CompanyName, COUNT(OrderID) AS "********" FROM Orders
+   ...> INNER JOIN Customers
+   ...> ON Orders.CustomerID = Customers.CustomerID
+   ...> GROUP BY CompanyName
+   ...> ORDER BY "********" ASC;
+CompanyName   ********  
+------------  ----------
+Slots Carpet  2         
+Deerfield Ti  3         
+Main Tile an  4         
+Sagebrush Ca  5         
+Floor Co.     6  
+
+# 6
+sqlite> SELECT CompanyName, COUNT(OrderID) AS "********" FROM Orders
+   ...> INNER JOIN Customers
+   ...> ON Orders.CustomerID = Customers.CustomerID
+   ...> GROUP BY CompanyName
+   ...> ORDER BY "********" DESC
+   ...> LIMIT 1;
+CompanyName  ********  
+-----------  ----------
+Floor Co.    6     
+
+# 7
+sqlite> SELECT CompanyName, SUM(Quantity) AS "********" FROM OrderDetails
+   ...> INNER JOIN Orders
+   ...> ON OrderDetails.OrderID = Orders.OrderID
+   ...> INNER JOIN Customers
+   ...> ON Orders.CustomerID = Customers.CustomerID
+   ...> GROUP BY CompanyName
+   ...> ORDER BY "********" DESC;
+CompanyName         ********  
+------------------  ----------
+Main Tile and Bath  940       
+Sagebrush Carpet    740       
+Floor Co.           670       
+Deerfield Tile      340       
+Slots Carpet        250       
+
+# 8
+sqlite> SELECT OrderID, Quantity*UnitPrice AS "********" FROM OrderDetails
+   ...> WHERE OrderID==4;
+OrderID     ********  
+----------  ----------
+4           400.0  
+
+# 9
+sqlite> SELECT OrderID, SUM(Quantity*UnitPrice) AS "********" FROM OrderDetails
+   ...> GROUP BY OrderID;
+OrderID     ********  
+----------  ----------
+1           48.0      
+2           1948.7    
+3           2395.9    
+4           400.0     
+5           3638.6    
+6           384.5     
+7           1321.5    
+8           1941.7    
+9           300.0     
+10          133.2     
+11          421.2     
+12          32.0      
+13          250.0     
+14          881.0     
+15          1344.1    
+16          207.5     
+17          1942.6    
+18          285.5     
+19          1626.5    
+20          166.0     
+
+# 10
+
+
+
+
+# 11
+
+sqlite> SELECT OrderID, SUM(Quantity) AS "********" FROM OrderDetails
+   ...> GROUP BY OrderID;
+OrderID     ********  
+----------  ----------
+1           90        
+2           330       
+3           240       
+4           80        
+5           380       
+6           140       
+7           210       
+8           190       
+9           60        
+10          100       
+11          180       
+12          60        
+13          50        
+14          140       
+15          110       
+16          70        
+17          200       
+18          120       
+19          130       
+20          60        
+
+sqlite> SELECT OrderID, SUM(Quantity*UnitPrice) AS "********" FROM OrderDetails
+   ...> GROUP BY OrderID
+   ...> HAVING "********" >1000;
+OrderID     ********  
+----------  ----------
+2           1948.7    
+3           2395.9    
+5           3638.6    
+7           1321.5    
+8           1941.7    
+15          1344.1    
+17          1942.6    
+19          1626.5    
