@@ -37,7 +37,7 @@
 		<type label="SET" length="1" sql="SET" quote=""/>
 		<type label="Bit" length="0" sql="bit" quote=""/>
 	</group>
-</datatypes><table x="486" y="281" name="chefs">
+</datatypes><table x="458" y="276" name="chefs">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -60,7 +60,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="755" y="275" name="meals">
+<table x="704" y="288" name="meals">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -80,54 +80,37 @@
 <row name="updated_at" null="1" autoincrement="0">
 <datatype>DATETIME</datatype>
 <default>NULL</default></row>
+<row name="category_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="category" row="id" />
+</row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
 </table>
-<table x="495" y="530" name="chefs">
+<table x="1136" y="423" name="ingredients">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="chef_firstname" null="1" autoincrement="0">
-<datatype>VARCHAR(64)</datatype>
-<default>NULL</default></row>
-<row name="chef_lastname" null="1" autoincrement="0">
-<datatype>VARCHAR(64)</datatype>
-<default>NULL</default></row>
-<row name="nationality" null="1" autoincrement="0">
-<datatype>VARCHAR(64)</datatype>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="898" y="291" name="ingredient_meas">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="meal_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="meals" row="id" />
 </row>
-<row name="created_at" null="1" autoincrement="0">
-<datatype>DATETIME</datatype>
-<default>NULL</default></row>
-<row name="updated_at" null="1" autoincrement="0">
-<datatype>DATETIME</datatype>
-<default>NULL</default></row>
-<key type="PRIMARY" name="">
-<part>id</part>
-</key>
-</table>
-<table x="703" y="527" name="meals">
-<row name="id" null="1" autoincrement="1">
+<row name="quantity" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="meal_name" null="1" autoincrement="0">
+<row name="measurement" null="1" autoincrement="0">
 <datatype>VARCHAR(64)</datatype>
 <default>NULL</default></row>
-<row name="meal_ingredients" null="1" autoincrement="0">
-<datatype>VARCHAR(64)</datatype>
-<default>NULL</default></row>
-<row name="created_at" null="1" autoincrement="0">
-<datatype>DATETIME</datatype>
-<default>NULL</default></row>
-<row name="updated_at" null="1" autoincrement="0">
-<datatype>DATETIME</datatype>
-<default>NULL</default></row>
-<row name="ingredient_id" null="1" autoincrement="0">
+<row name="ingredients_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="ingredients" row="id" />
 </row>
@@ -135,30 +118,33 @@
 <part>id</part>
 </key>
 </table>
-<table x="950" y="284" name="ingredients">
+<table x="356" y="64" name="menu">
 <row name="id" null="1" autoincrement="1">
-<datatype>INTEGER</datatype>
-<default>NULL</default></row>
-<row name="meal_id" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><relation table="meals" row="id" />
-</row>
-<row name="quantity" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
 </table>
-<table x="954" y="548" name="ingredients">
+<table x="501" y="133" name="menu_meals">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="quantity" null="1" autoincrement="0">
+<row name="menu_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default></row>
-<row name="measurement" null="1" autoincrement="0">
-<datatype>VARCHAR(64)</datatype>
+<default>NULL</default><relation table="menu" row="id" />
+</row>
+<row name="meal_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="meals" row="id" />
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="405" y="566" name="category">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
